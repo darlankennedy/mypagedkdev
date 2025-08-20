@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Darlan Kennedy • Full Stack Developer</title>
+  <meta name="description" content="Portfólio interativo, responsivo e gamificado de Darlan Kennedy — Java • Node.js • PHP • Python • React • Vue • Angular" />
+  <meta name="theme-color" content="#0b1020" />
+  <style>
+    :root{
+      --bg:#0b1020; --text:#e5e7eb; --muted:#0d1430; --card:#0f162e; --border:#1f2a4c; --sub:#9ca3af;
+      --brand:#00e5ff; --brand2:#7c4dff; --accent:#22c55e; --hot:#ff8a00; --danger:#ef4444;
+      --nav-h:72px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f8fafc; --text:#0b1020; --muted:#eef2ff; --card:#ffffff; --border:#d1d5db; --sub:#334155; --brand:#0ea5e9; --brand2:#7c3aed }
+    }
+    [data-theme="light"]{ --bg:#f8fafc; --text:#0b1020; --muted:#eef2ff; --card:#ffffff; --border:#d1d5db; --sub:#334155; --brand:#0ea5e9; --brand2:#7c3aed }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu; background:var(--bg); color:var(--text); overflow-x:hidden}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* ====== AURORA BACKGROUND ====== */
+    .aurora{position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(1200px 600px at 10% -10%, rgba(0,229,255,.18), transparent),
+                                 radial-gradient(1000px 500px at 90% 10%, rgba(124,77,255,.16), transparent),
+                                 radial-gradient(900px 700px at 50% 100%, rgba(34,197,94,.1), transparent);} 
+    .glow{position:fixed;inset:-10%;filter:blur(80px);opacity:.55;background:conic-gradient(from 180deg, rgba(0,229,255,.2), rgba(124,77,255,.2), rgba(34,197,94,.15), rgba(0,229,255,.2));animation:spin 18s linear infinite}
+    @keyframes spin{to{transform:rotate(1turn)}}
+
+    /* ====== NAVBAR ====== */
+    .nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(10px);background:color-mix(in oklab, var(--bg) 88%, transparent); border-bottom:1px solid var(--border)}
+    .nav .bar{max-width:1200px;margin:auto;display:flex;align-items:center;gap:14px;padding:12px 18px}
+    .logo{font-weight:800;letter-spacing:.5px;background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .nav a{padding:8px 12px;border-radius:10px}
+    .nav a:hover{background:linear-gradient(180deg,var(--muted),transparent)}
+    .nav a.active{outline:2px solid color-mix(in oklab, var(--brand) 35%, transparent); outline-offset:2px}
+    .nav .spacer{flex:1}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(180deg,var(--muted),transparent);cursor:pointer;transition:.2s}
+    .btn:hover{transform:translateY(-1px)}
+
+    /* ====== HERO ====== */
+    .wrap{max-width:1200px;margin:auto;padding:24px}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;padding:28px;margin-top:18px;scroll-margin-top:var(--nav-h)}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:22px;box-shadow:0 8px 28px rgba(0,0,0,.28)}
+    .headline{font-size:clamp(28px,4vw,48px);font-weight:900;margin:0;line-height:1.1}
+    .headline strong{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .kicker{color:var(--sub);margin:.5rem 0 1rem}
+    .badges{display:flex;flex-wrap:wrap;gap:8px}
+    .badge{padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:linear-gradient(135deg,var(--muted),transparent);font-size:12px}
+
+    .photo{position:relative;display:grid;place-items:center;padding:18px}
+    .photo .ring{position:relative;width:min(320px,65vw);aspect-ratio:1;border-radius:50%;background:
+      linear-gradient(180deg,color-mix(in oklab,var(--brand) 35%, transparent), transparent 40%),
+      radial-gradient(400px 200px at 50% -20%, rgba(124,77,255,.5), transparent 60%);
+      padding:10px;border:1px solid var(--border);box-shadow:inset 0 0 30px rgba(0,229,255,.1)}
+    .photo img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;border:6px solid color-mix(in oklab,var(--brand) 30%, transparent)}
+    .photo .float{position:absolute;bottom:18px;right:22px;padding:8px 10px;border-radius:10px;border:1px dashed var(--border);background:linear-gradient(135deg,var(--muted),transparent);font-size:12px}
+
+    
+
+    /* Sections */
+    .section{margin:26px 0;padding:22px;scroll-margin-top:var(--nav-h)}
+    .section-title{display:flex;align-items:center;gap:10px;font-weight:800;margin:0 0 10px}
+    .section-title .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand2))}
+
+    .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+    .chip{border:1px dashed var(--border);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.02)}
+
+    /*/* Snake */
+    .snake-wrap{display:grid;gap:12px}
+    .gamebar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .game-ctrls{display:none;gap:8px;flex-wrap:wrap}
+    @media (hover:none){ .game-ctrls{display:flex} }
+
+    canvas#snake-canvas{background:var(--card)}
+
+    /* Projects */
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+    .project{position:relative;transition:transform .15s ease, box-shadow .2s;will-change:transform}
+    .project:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
+    .project h4{margin:6px 0}
+    .project p{margin:0;color:var(--sub);font-size:14px}
+
+    /* Timeline */
+    .timeline{position:relative;padding-left:18px}
+    .timeline:before{content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;background:linear-gradient(var(--brand),var(--brand2))}
+    .tl-item{position:relative;margin:12px 0}
+    .tl-item:before{content:"";position:absolute;left:-2px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 3px rgba(0,229,255,.22)}
+
+    /* Contact */
+    .contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+    .contact a{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--border);border-radius:12px}
+
+    .footer{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:24px 0}
+
+    /* Toast */
+    .toast{position:fixed;bottom:20px;right:20px;background:var(--card);border:1px solid var(--border);padding:12px 14px;border-radius:12px;opacity:0;transform:translateY(20px);transition:.3s}
+    .toast.show{opacity:1;transform:translateY(0)}
+
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .photo{order:-1}
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora"></div>
+  <div class="glow"></div>
+
+  <!-- NAVBAR -->
+  <div class="nav">
+    <div class="bar">
+      <div class="logo">DK • Portfólio</div>
+      <a href="#sobre" data-link>Sobre</a>
+      <a href="#projetos" data-link>Projetos</a>
+      <a href="#experiencia" data-link>Experiência</a>
+      <a href="#contato" data-link>Contato</a>
+      <div class="spacer"></div>
+      <button id="theme" class="btn" aria-label="Alternar tema">🌓 Tema</button>
+      <a class="btn" target="_blank" rel="noopener" href="https://www.linkedin.com/in/darlandkodev/">LinkedIn</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://github.com/darlankennedy">GitHub</a>
+      <a class="btn" href="cv.pdf" download>⬇️ CV</a>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero card" id="top">
+      <div>
+        <h1 class="headline">Olá, eu sou <strong>Darlan Kennedy</strong> — <br/>Full Stack Developer focado em <strong>APIs performáticas</strong>, <strong>microsserviços</strong> e <strong>DX</strong>.</h1>
+        <p class="kicker">Java • Node.js • PHP • Python • React • Vue • Angular • Docker • Kubernetes • CI/CD</p>
+        <div class="badges">
+          <span class="badge">+10 anos em TI</span>
+          <span class="badge">Microsserviços</span>
+          <span class="badge">Keycloak & JWT</span>
+          <span class="badge">Docker/K8s</span>
+          <span class="badge">GitHub Actions • GitLab CI</span>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn" href="#contato" data-link>✉️ Vamos conversar</a>
+          <a class="btn" target="_blank" rel="noopener" href="https://wa.me/5592984160889">💬 WhatsApp</a>
+        </div>
+      </div>
+      <div class="photo">
+        <div class="ring">
+          <!-- Substitua por "profile.jpg" ao publicar -->
+          <img src="profile.jpg" alt="Foto de Darlan Kennedy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%230f162e'/><text x='50%' y='52%' font-size='14' fill='%23a5b4fc' text-anchor='middle' font-family='system-ui'>Adicione profile.jpg</text></svg>'"/>
+        </div>
+        <div class="float">Manaus/AM • Disponível</div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="section card" id="sobre">
+      <div class="section-title"><span class="dot"></span><span>Resumo</span></div>
+      <ul style="margin-top:6px">
+        <li>Atuação no <strong>planejamento, organização e execução</strong> de procedimentos.</li>
+        <li>Boas práticas e design patterns: <strong>Clean Code</strong>, <strong>SOLID</strong>, <strong>testes automatizados</strong> e <strong>code review</strong> para código limpo, modular e reutilizável.</li>
+        <li>Vivência com <strong>SSO (Keycloak)</strong> e <strong>filas assíncronas (RabbitMQ)</strong> para comunicação eficiente entre sistemas.</li>
+        <li><strong>Full Stack</strong> em web, mobile e desktop: criação/manutenção de <strong>APIs</strong>, <strong>arquiteturas escaláveis</strong> com microsserviços, conteinerização, orquestração e integrações.</li>
+        <li>Stacks: <strong>Java / Spring Boot</strong>, <strong>Node.js / NestJS / Express</strong>, <strong>PHP / Symfony</strong> e front-end com <strong>Vue.js, React e Angular</strong>.</li>
+        <li><strong>Resultados</strong>: -40% no tempo de resposta de APIs (Java/Node) e +60% na velocidade de deploy com <strong>CI/CD (GitLab + Docker)</strong>.</li>
+        <li>Criação e manutenção de sistemas com <strong>+10 mil usuários ativos</strong> e picos de acesso estáveis.</li>
+      </ul>
+
+      <div class="section-title" style="margin-top:18px"><span class="dot"></span><span>Ferramentas & Tecnologias</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+        <div>
+          <h4 style="margin:6px 0">Back-end</h4>
+          <div class="skills">
+            <div class="chip">Java (SE, ME, EE, Spring Boot)</div>
+            <div class="chip">PHP (Laravel, Laradocker)</div>
+            <div class="chip">Node.js (NestJS, Express)</div>
+            <div class="chip">Python (Django, Flask, FastAPI)</div>
+          </div>
+          <h4 style="margin:12px 0 6px">APIs e Comunicação</h4>
+          <div class="skills">
+            <div class="chip">REST</div>
+            <div class="chip">gRPC</div>
+            <div class="chip">SOAP</div>
+            <div class="chip">RPC</div>
+            <div class="chip">MQTT</div>
+            <div class="chip">AMQP</div>
+          </div>
+          <h4 style="margin:12px 0 6px">Autenticação & Segurança</h4>
+          <div class="skills">
+            <div class="chip">JWT</div>
+            <div class="chip">OAuth2</div>
+            <div class="chip">OpenID Connect</div>
+          </div>
+        </div>
+        <div>
+          <h4 style="margin:6px 0">Front-end</h4>
+          <div class="skills">
+            <div class="chip">HTML • CSS • JS • TS</div>
+            <div class="chip">AJAX</div>
+          </div>
+          <h4 style="margin:12px 0 6px">Frameworks & Bibliotecas</h4>
+          <div class="skills">
+            <div class="chip">React (Next.js, Remix)</div>
+            <div class="chip">Vue (Nuxt, Vue 3, Pinia, Vuex)</div>
+            <div class="chip">Angular</div>
+            <div class="chip">Svelte (SvelteKit)</div>
+            <div class="chip">Solid.js</div>
+            <div class="chip">GraphQL</div>
+            <div class="chip">WebSockets</div>
+          </div>
+          <h4 style="margin:12px 0 6px">Mobile</h4>
+          <div class="skills">
+            <div class="chip">React Native (Expo, Bare)</div>
+            <div class="chip">Android (Java, Kotlin)</div>
+            <div class="chip">Flutter (Dart)</div>
+            <div class="chip">PWA</div>
+          </div>
+        </div>
+        <div>
+          <h4 style="margin:6px 0">Ferramentas & Infra</h4>
+          <div class="skills">
+            <div class="chip">Git • GitHub • GitLab • Bitbucket</div>
+            <div class="chip">GitHub Actions • GitLab CI/CD • Jenkins</div>
+            <div class="chip">Docker • Kubernetes</div>
+            <div class="chip">Linux • Shell Script</div>
+            <div class="chip">AWS (EC2, S3, Lambda, DynamoDB)</div>
+            <div class="chip">Google Cloud • Firebase</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="badges" style="margin-top:14px">
+        <span class="badge">Cursando — Engenharia da Computação</span>
+        <span class="badge">Técnico em Informática</span>
+      </div>
+    </section>
+
+    <!-- JOGO DA COBRINHA -->
+    <section class="section card" id="snake-section">
+      <div class="section-title"><span class="dot"></span><span>Jogo da Cobrinha</span></div>
+      <div class="snake-wrap">
+        <div class="gamebar">
+          <div> Pontos: <strong id="snake-score">0</strong> • Recorde: <strong id="snake-best">0</strong> </div>
+          <div class="game-ctrls" aria-label="Controles do jogo">
+            <button class="btn" id="btn-left" aria-label="Esquerda">◀</button>
+            <button class="btn" id="btn-up" aria-label="Cima">▲</button>
+            <button class="btn" id="btn-down" aria-label="Baixo">▼</button>
+            <button class="btn" id="btn-right" aria-label="Direita">▶</button>
+            <button class="btn" id="btn-pause" aria-label="Pausar/Retomar">⏯</button>
+            <button class="btn" id="btn-restart" aria-label="Reiniciar">↻</button>
+          </div>
+        </div>
+        <canvas id="snake-canvas" width="420" height="420" style="border:1px solid var(--border);border-radius:14px;width:100%;height:auto;image-rendering:pixelated"></canvas>
+        <div id="snake-msg" style="min-height:18px;color:var(--sub)"></div>
+        <p style="color:var(--sub);margin:0">Controles: setas ou WASD • Espaço: pausar • R: reiniciar</p>
+      </div>
+    </section>
+
+    <!-- PROJETOS -->
+    <section class="section card" id="projetos">
+      <div class="section-title"><span class="dot"></span><span>Projetos em destaque</span></div>
+      <p style="margin-top:0;color:var(--sub)">Mostrando projetos do GitHub <code>@darlankennedy</code>. Para <em>escolher</em> projetos específicos, edite as constantes no script (ver comentários no final do arquivo).</p>
+      <div class="projects" id="projects"></div>
+    </section>
+
+    <!-- EXPERIÊNCIA -->
+    <section class="section card" id="experiencia">
+      <div class="section-title"><span class="dot"></span><span>Experiência</span></div>
+      <div class="timeline">
+        <div class="tl-item">
+          <h4 style="margin:0">Vox Tecnologia — Programador Pleno IV <small style="color:var(--sub)">mai/2025 – ago/2025 · 4 meses</small></h4>
+          <ul style="color:var(--sub)">
+            <li>Desenvolvimento e manutenção de sistemas internos.</li>
+            <li>Implementação de funcionalidades conforme requisitos.</li>
+            <li>Otimização de códigos e processos.</li>
+            <li>Correção de bugs e suporte às aplicações.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <h4 style="margin:0">Instituto CERTI Amazônia — Desenvolvedor Full Stack <small style="color:var(--sub)">out/2022 – abr/2025 · 2 anos 7 meses</small></h4>
+          <ul style="color:var(--sub)">
+            <li>Apps com Python, Java, Node.js e NestJS.</li>
+            <li>APIs REST, GraphQL e gRPC; microsserviços com Docker e Kubernetes.</li>
+            <li>Pipelines de CI/CD; web/mobile com React, Angular, Vue e React Native.</li>
+            <li>PostgreSQL, MySQL, MongoDB; Scrum e métodos ágeis.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <h4 style="margin:0">Grupo ICTS — Desenvolvedor Full Stack <small style="color:var(--sub)">mai/2022 – out/2022 · 6 meses</small></h4>
+          <ul style="color:var(--sub)">
+            <li>Web com React.js e AngularJS; mobile com React Native.</li>
+            <li>APIs em Java Spring Boot e Node.js.</li>
+            <li>Orquestração de ambientes com Docker e versionamento com Git.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <h4 style="margin:0">Kodigos Software — Desenvolvedor Full Stack <small style="color:var(--sub)">fev/2021 – mai/2022 · 1 ano 4 meses</small></h4>
+          <ul style="color:var(--sub)">
+            <li>Soluções web, mobile e desktop (Java, PHP, Node, Python).</li>
+            <li>SCRUM; microservices com Docker; integrações em GCP e Azure.</li>
+            <li>Administração de MySQL, PostgreSQL e SQL Server.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <h4 style="margin:0">Diretório Digital — Desenvolvedor Full Stack <small style="color:var(--sub)">jul/2020 – fev/2021 · 8 meses</small></h4>
+          <ul style="color:var(--sub)">
+            <li>Foco em otimização e segurança.</li>
+            <li>Autenticação com OAuth2 e Keycloak; APIs RESTful e endpoints seguros.</li>
+            <li>Stack: PHP, JavaScript, PostgreSQL e Docker.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <h4 style="margin:0">RBarcos — Desenvolvedor de Software <small style="color:var(--sub)">jul/2019 – jun/2020 · 1 ano</small></h4>
+          <ul style="color:var(--sub)">
+            <li>Plataforma de alocação de embarcações; melhorias contínuas e correções.</li>
+          </ul>
+          <h4 style="margin:6px 0 0">RBarcos — Programador de Aplicativos Web <small style="color:var(--sub)">jun/2019 – jul/2019 · 2 meses</small></h4>
+          <ul style="color:var(--sub)">
+            <li>Funcionalidades para apps web conforme requisitos do projeto.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <h4 style="margin:0">Map Technology — Técnico de Suporte em TI <small style="color:var(--sub)">nov/2012 – jan/2015 · 2 anos 3 meses</small></h4>
+          <ul style="color:var(--sub)">
+            <li>Atendimento e suporte; diagnóstico e resolução em sistema MES.</li>
+            <li>Assistência a clientes do distrito industrial e manutenção preventiva.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMAÇÃO -->
+    <section class="section card" id="formacao">
+      <div class="section-title"><span class="dot"></span><span>Formação Acadêmica</span></div>
+      <div class="timeline">
+        <div class="tl-item">
+          <h4 style="margin:0">FUCAPI — Bacharelado em Engenharia de Computação <small style="color:var(--sub)">(2016 – 2025)</small></h4>
+          <p style="color:var(--sub);margin:.25rem 0 0">Cursando.</p>
+        </div>
+        <div class="tl-item">
+          <h4 style="margin:0">FUCAPI — Ensino Técnico em Informática <small style="color:var(--sub)">(2015)</small></h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="section card" id="contato">
+      <div class="section-title"><span class="dot"></span><span>Contato</span></div>
+      <div class="contact">
+        <a href="mailto:darlankennedy2@gmail.com" aria-label="Enviar e-mail">✉️ <span>darlankennedy2@gmail.com</span></a>
+        <a target="_blank" rel="noopener" href="https://wa.me/5592984160889" aria-label="Conversar no WhatsApp">💬 <span>WhatsApp: (92) 9.8416-0889</span></a>
+        <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/darlandkodev/" aria-label="Perfil no LinkedIn">🔗 <span>LinkedIn</span></a>
+        <a target="_blank" rel="noopener" href="https://github.com/darlankennedy" aria-label="Perfil no GitHub">🐙 <span>GitHub</span></a>
+      </div>
+    </section>
+
+    <div class="footer">
+      <small>© <span id="year"></span> Darlan Kennedy — Manaus/AM</small>
+      <a href="#top" class="btn" data-link>⬆️ Voltar ao topo</a>
+    </div>
+  </main>
+
+  <script>
+    // ===== Helpers =====
+    const $=(q,el=document)=>el.querySelector(q); const $$=(q,el=document)=>[...el.querySelectorAll(q)];
+
+    // ===== GitHub config (edite aqui) =====
+    const GH_USER = 'darlankennedy';
+    // Liste repositórios específicos para destacar (ordem preservada). Ex.: ['darlankennedy/meu-repo','darlankennedy/outro-repo']
+    const FEATURED_REPOS = [];
+    // OU use um tópico (topic) para filtrar automaticamente. Ex.: 'portfolio' (coloque esse topic no repo pelo GitHub)
+    const FEATURED_TOPIC = '';
+
+    // ===== Theme =====
+    const store={get(){try{return JSON.parse(localStorage.getItem('dk_portfolio')||'{}')}catch{return{}}}, set(v){localStorage.setItem('dk_portfolio',JSON.stringify(v))}}
+    const savedTheme=(store.get()||{}).theme; if(savedTheme) document.documentElement.setAttribute('data-theme',savedTheme)
+    $('#theme')?.addEventListener('click',()=>{const cur=document.documentElement.getAttribute('data-theme'); const next=cur==='light'?'':'light'; if(next) document.documentElement.setAttribute('data-theme',next); else document.documentElement.removeAttribute('data-theme'); store.set(Object.assign(store.get(),{theme:next}))})
+
+    // ===== Smooth scroll with navbar offset + active link (scroll‑spy) =====
+    const NAV=$('.nav');
+    function goTo(hash){
+      if(!hash || hash==='#') return;
+      if(hash==='#top'){ window.scrollTo({top:0, behavior:'smooth'}); return }
+      const target=$(hash);
+      if(!target) return;
+      const off=(NAV?.offsetHeight||72)+8;
+      const y=target.getBoundingClientRect().top + window.pageYOffset - off;
+      window.scrollTo({top:y, behavior:'smooth'});
+      try{ history.replaceState(null,'',hash) }catch(_){}
+    }
+    $$('a[data-link]').forEach(a=>{
+      a.addEventListener('click', (e)=>{ e.preventDefault(); goTo(a.getAttribute('href')) })
+    })
+
+    const sections=['#sobre','#projetos','#experiencia','#formacao','#contato'];
+    function setActive(){
+      const off=(NAV?.offsetHeight||72)+24;
+      let current='#top';
+      for(const id of sections){
+        const el=$(id); if(!el) continue;
+        const top=el.getBoundingClientRect().top - off;
+        if(top <= 0) current=id; else break;
+      }
+      $$('.nav a[data-link]').forEach(a=>a.classList.toggle('active', a.getAttribute('href')===current))
+    }
+    window.addEventListener('scroll', setActive, {passive:true});
+    window.addEventListener('load', ()=>{ setActive(); if(location.hash) goTo(location.hash) })
+
+    // ===== GitHub Projects =====
+    async function loadRepos(){
+      const grid = $('#projects');
+      grid.innerHTML = '';
+      const headers = { 'Accept':'application/vnd.github+json' };
+
+      // 1) Modo CURADO por lista
+      if (Array.isArray(FEATURED_REPOS) && FEATURED_REPOS.length){
+        try{
+          const details = await Promise.all(
+            FEATURED_REPOS.map(slug => fetch(`https://api.github.com/repos/${slug}`, {headers}).then(r=>r.ok?r.json():null).catch(()=>null))
+          );
+          const repos = details.filter(Boolean);
+          renderRepos(repos);
+          return;
+        }catch(err){ grid.innerHTML = '<p>Não foi possível carregar os repositórios selecionados.</p>'; return }
+      }
+
+      // 2) Modo AUTOMÁTICO (com filtro opcional por tópico)
+      try{
+        const res = await fetch(`https://api.github.com/users/${GH_USER}/repos?per_page=100&sort=updated`, {headers});
+        const all = await res.json();
+        let repos = Array.isArray(all) ? all.filter(r=>!r.fork) : [];
+        if (FEATURED_TOPIC){
+          const topic = FEATURED_TOPIC.toLowerCase();
+          repos = repos.filter(r => (Array.isArray(r.topics) && r.topics.map(t=>t.toLowerCase()).includes(topic)) || (r.description && r.description.toLowerCase().includes('#'+topic)));
+        }
+        repos = repos.sort((a,b)=>(b.stargazers_count||0)-(a.stargazers_count||0)).slice(0,9);
+        renderRepos(repos);
+      }catch(e){ grid.innerHTML='<p>Não foi possível carregar os repositórios agora.</p>' }
+    }
+
+    function renderRepos(repos){
+      const grid = $('#projects');
+      if(!repos || !repos.length){ grid.innerHTML = '<p>Sem projetos para mostrar ainda. Deixe alguns públicos ou ajuste FEATURED_REPOS.</p>'; return }
+      repos.forEach(r=>{
+        const el = document.createElement('a');
+        el.href = r.html_url; el.target = '_blank'; el.rel='noopener'; el.className='card project';
+        const live = r.homepage ? `<span class='badge'>🔗 Live</span>` : '';
+        const topics = (r.topics||[]).slice(0,2).map(t=>`<span class='badge'>#${t}</span>`).join('');
+        el.innerHTML = `<h4>${r.name}</h4>
+            <p>${r.description ? r.description.replace(/</g,'&lt;') : 'Sem descrição'}</p>
+            <div class='badges' style='margin-top:8px'>
+              <span class='badge'>★ ${r.stargazers_count||0}</span>
+              <span class='badge'>⬇ ${r.forks_count||0}</span>
+              <span class='badge'>🗓 ${r.updated_at ? new Date(r.updated_at).toLocaleDateString('pt-BR') : ''}</span>
+              <span class='badge'>${r.language||'Code'}</span>
+              ${live}
+              ${topics}
+            </div>`;
+        grid.appendChild(el);
+      })
+    }
+    }
+
+    // ===== Snake Game =====
+    function initSnake(){
+      const canvas=document.getElementById('snake-canvas'); if(!canvas) return; const ctx=canvas.getContext('2d');
+      const section=document.getElementById('snake-section');
+      let grid=21, speed=8, playing=true, over=false, tail=3;
+      let snake=[{x:10,y:10}], dir={x:1,y:0}, nextDir={x:1,y:0};
+      let food=randFood(); let score=0; let best=Number(localStorage.getItem('dk_snake_best')||0);
+      const scoreEl=document.getElementById('snake-score'); const bestEl=document.getElementById('snake-best'); const msgEl=document.getElementById('snake-msg');
+      let size=20; let last=0, acc=0;
+
+      function theme(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#0f162e' }
+      function updateHud(){ scoreEl.textContent=score; bestEl.textContent=best }
+      function randFood(){ let p; do{ p={x:Math.floor(Math.random()*grid), y:Math.floor(Math.random()*grid)} }while(snake.some(s=>s.x===p.x&&s.y===p.y)); return p }
+      function setDir(x,y){ if((x===-dir.x&&y===0)||(y===-dir.y&&x===0)) return; nextDir={x,y} }
+      function togglePause(){ if(over) return; playing=!playing; msgEl.textContent=playing?'':'Pausado' }
+      function restart(){ snake=[{x:10,y:10}]; dir={x:1,y:0}; nextDir={x:1,y:0}; tail=3; score=0; over=false; playing=true; food=randFood(); msgEl.textContent=''; updateHud(); draw() }
+
+      function resize(){ const w=section.getBoundingClientRect().width; const px=Math.floor(Math.min(560, w-20)); const dpr=Math.min(window.devicePixelRatio||1,2); canvas.width=px*dpr; canvas.height=px*dpr; canvas.style.width=px+'px'; canvas.style.height=px+'px'; size=(px*dpr)/grid; draw() }
+      window.addEventListener('resize', resize);
+
+      document.getElementById('btn-up')?.addEventListener('click',()=>setDir(0,-1));
+      document.getElementById('btn-down')?.addEventListener('click',()=>setDir(0,1));
+      document.getElementById('btn-left')?.addEventListener('click',()=>setDir(-1,0));
+      document.getElementById('btn-right')?.addEventListener('click',()=>setDir(1,0));
+      document.getElementById('btn-restart')?.addEventListener('click',restart);
+      document.getElementById('btn-pause')?.addEventListener('click',togglePause);
+
+      window.addEventListener('keydown', (e)=>{
+        switch(e.key){
+          case 'ArrowUp': case 'w': case 'W': setDir(0,-1); break;
+          case 'ArrowDown': case 's': case 'S': setDir(0,1); break;
+          case 'ArrowLeft': case 'a': case 'A': setDir(-1,0); break;
+          case 'ArrowRight': case 'd': case 'D': setDir(1,0); break;
+          case ' ': togglePause(); e.preventDefault(); break;
+          case 'r': case 'R': restart(); break;
+        }
+      });
+
+      function tick(){ dir=nextDir; const head={...snake[snake.length-1]}; head.x=(head.x+dir.x+grid)%grid; head.y=(head.y+dir.y+grid)%grid;
+        if(snake.some(p=>p.x===head.x&&p.y===head.y)){ over=true; playing=false; msgEl.textContent='Game Over'; if(score>best){best=score; localStorage.setItem('dk_snake_best',best)}; updateHud() }
+        snake.push(head); while(snake.length>tail) snake.shift();
+        if(head.x===food.x && head.y===food.y){ tail++; score++; food=randFood(); updateHud() }
+      }
+      function draw(){ const bg=theme('--card'); const br=theme('--brand'); const br2=theme('--brand2'); const hot=theme('--hot');
+        ctx.fillStyle=bg; ctx.fillRect(0,0,canvas.width,canvas.height);
+        const cell=size; ctx.fillStyle=hot; ctx.fillRect(food.x*cell, food.y*cell, cell, cell);
+        for(let i=0;i<snake.length;i++){ const p=snake[i]; ctx.fillStyle=i===snake.length-1?br2:br; ctx.fillRect(p.x*cell, p.y*cell, cell, cell) }
+      }
+      function loop(ts){ if(!last) last=ts; const dt=(ts-last)/1000; last=ts; if(playing&&!over){ acc+=dt; const step=1/speed; while(acc>=step){ tick(); acc-=step } } draw(); requestAnimationFrame(loop) }
+      updateHud(); resize(); requestAnimationFrame(loop);
+    }
+
+// Init
+    $('#year').textContent=new Date().getFullYear();
+    loadRepos();
+    initSnake();
+  </script>
+</body>
+</html>
