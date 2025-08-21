@@ -11,6 +11,7 @@
       --bg:#02040a; --text:#e6eaf2; --muted:#0a0f1e; --card:#070b16; --border:#111827; --sub:#9aa3b8;
       --brand:#a78bfa; --brand2:#f472b6; --accent:#22c55e; --hot:#fb923c; --danger:#ef4444;
       --nav-h:72px;
+      --fs-base:18px; /* fonte maior */
     }
     @media (prefers-color-scheme: light){
       :root{ --bg:#f8fafc; --text:#0b1020; --muted:#eef2ff; --card:#ffffff; --border:#d1d5db; --sub:#334155; --brand:#0ea5e9; --brand2:#7c3aed }
@@ -20,7 +21,12 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     html{scroll-behavior:smooth}
-    body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu; background:var(--bg); color:var(--text); overflow-x:hidden; padding-top:var(--nav-h)}
+    body{
+      margin:0;
+      font:var(--fs-base)/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;
+      background:var(--bg); color:var(--text);
+      overflow-x:hidden; padding-top:var(--nav-h)
+    }
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
 
@@ -41,18 +47,40 @@
     .nav a:hover{background:linear-gradient(180deg,var(--muted),transparent)}
     .nav a.active{outline:2px solid color-mix(in oklab, var(--brand) 35%, transparent); outline-offset:2px}
     .nav .spacer{flex:1}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(180deg,var(--muted),transparent);cursor:pointer;transition:.2s}
-    .btn:hover{transform:translateY(-1px)}
+
+    /* ====== BOTÕES (melhor contraste no dark) ====== */
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:12px 16px;border-radius:12px;border:1px solid var(--border);
+      cursor:pointer;transition:.2s;color:var(--text);
+      background: linear-gradient(
+        180deg,
+        color-mix(in oklab, var(--brand) 14%, var(--muted)),
+        transparent 55%
+      );
+      border-color: color-mix(in oklab, var(--brand) 40%, var(--border));
+      font-weight:600;
+    }
+    .btn:not(.snake-start):hover{transform:translateY(-1px)}
+    #theme.btn{
+      background: linear-gradient(
+        90deg,
+        color-mix(in oklab, var(--brand) 35%, var(--muted)),
+        color-mix(in oklab, var(--brand2) 35%, var(--muted))
+      );
+      border-color: color-mix(in oklab, var(--brand2) 50%, var(--border));
+      color:#fff;
+    }
 
     /* ====== HERO ====== */
     .wrap{max-width:1280px;width:min(1280px,94vw);margin:auto;padding:24px 20px}
     .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;padding:12px 0;margin-top:0;scroll-margin-top:var(--nav-h)}
     .card{background:transparent;border:none;border-radius:0;box-shadow:none}
-    .headline{font-size:clamp(28px,4vw,48px);font-weight:900;margin:0;line-height:1.1}
+    .headline{font-size:clamp(32px,5vw,56px);font-weight:900;margin:0;line-height:1.1}
     .headline strong{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
-    .kicker{color:var(--sub);margin:.5rem 0 1rem}
-    .badges{display:flex;flex-wrap:wrap;gap:8px}
-    .badge{padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:linear-gradient(135deg,var(--muted),transparent);font-size:12px}
+    .kicker{color:var(--sub);margin:.6rem 0 1.1rem}
+    .badges{display:flex;flex-wrap:wrap;gap:10px}
+    .badge{padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:linear-gradient(135deg,var(--muted),transparent);font-size:1rem}
 
     .photo{position:relative;display:grid;place-items:center;padding:18px}
     .photo .ring{position:relative;width:min(320px,65vw);aspect-ratio:1;border-radius:50%;background:
@@ -60,24 +88,36 @@
       radial-gradient(400px 200px at 50% -20%, rgba(124,77,255,.5), transparent 60%);
       padding:10px;border:1px solid var(--border);box-shadow:inset 0 0 30px rgba(0,229,255,.1)}
     .photo img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;border:6px solid color-mix(in oklab,var(--brand) 30%, transparent)}
-    .photo .float{position:absolute;bottom:18px;right:22px;padding:8px 10px;border-radius:10px;border:1px dashed var(--border);background:linear-gradient(135deg,var(--muted),transparent);font-size:12px}
-
-    
+    .photo .float{position:absolute;bottom:18px;right:22px;padding:8px 10px;border-radius:10px;border:1px dashed var(--border);background:linear-gradient(135deg,var(--muted),transparent);font-size:1rem}
 
     /* Sections */
-    .section{margin:18px 0;padding:16px 0;scroll-margin-top:var(--nav-h)}
+    .section{margin:22px 0;padding:18px 0;scroll-margin-top:var(--nav-h)}
     .section + .section{border-top:1px solid var(--border)}
-    .section-title{display:flex;align-items:center;gap:10px;font-weight:800;margin:0 0 10px}
+    .section-title{display:flex;align-items:center;gap:10px;font-weight:800;margin:0 0 10px;font-size:1.15rem}
     .section-title .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand2))}
-
     .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-    .chip{border:1px dashed var(--border);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.02)}
+    .chip{border:1px dashed var(--border);border-radius:12px;padding:12px;background:rgba(255,255,255,.02);font-size:1rem}
 
-    /*/* Snake */
+    /* ===== Snake ===== */
     .snake-wrap{display:grid;gap:12px}
     .gamebar{display:flex;justify-content:space-between;align-items:center;gap:12px}
     .game-ctrls{display:none;gap:8px;flex-wrap:wrap}
     @media (hover:none){ .game-ctrls{display:flex} }
+
+    .snake-stage{ position:relative }
+    .snake-start{
+      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      z-index:1; padding:14px 18px; border-radius:14px; font-weight:800;
+      border:none; color:#fff; font-size:1rem;
+      background:linear-gradient(90deg, var(--brand), var(--brand2));
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      display:inline-flex; align-items:center; gap:8px; cursor:pointer;
+    }
+    /* não mover no hover */
+    .snake-start:hover,.snake-start:focus{
+      transform:translate(-50%,-50%);
+      box-shadow:0 12px 36px rgba(0,0,0,.45);
+    }
 
     canvas#snake-canvas{background:var(--card)}
 
@@ -86,7 +126,7 @@
     .project{position:relative;transition:transform .15s ease, box-shadow .2s;will-change:transform;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:16px}
     .project:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
     .project h4{margin:6px 0}
-    .project p{margin:0;color:var(--sub);font-size:14px}
+    .project p{margin:0;color:var(--sub);font-size:1rem}
     .project .badges{justify-content:center}
 
     /* Timeline */
@@ -151,7 +191,6 @@
       </div>
       <div class="photo">
         <div class="ring">
-          <!-- Substitua por "profile.jpg" ao publicar -->
           <img src="profile.jpg" alt="Foto de Darlan Kennedy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%230f162e\'/><text x=\'50%\' y=\'52%\' font-size=\'14\' fill=\'%23a5b4fc\' text-anchor=\'middle\' font-family=\'system-ui\'>Adicione profile.jpg</text></svg>'"/>
         </div>
         <div class="float">Manaus/AM • Disponível</div>
@@ -327,7 +366,7 @@
       </div>
     </section>
 
-        <!-- JOGO DA COBRINHA -->
+    <!-- JOGO DA COBRINHA -->
     <section class="section card" id="snake-section">
       <div class="section-title"><span class="dot"></span><span>Jogo da Cobrinha</span></div>
       <div class="snake-wrap">
@@ -338,13 +377,19 @@
             <button class="btn" id="btn-up" aria-label="Cima">▲</button>
             <button class="btn" id="btn-down" aria-label="Baixo">▼</button>
             <button class="btn" id="btn-right" aria-label="Direita">▶</button>
-            <button class="btn" id="btn-pause" aria-label="Pausar/Retomar">⏯</button>
+            <button class="btn" id="btn-pause" aria-label="Pausar/Retornar">⏯</button>
             <button class="btn" id="btn-restart" aria-label="Reiniciar">↻</button>
           </div>
         </div>
-        <canvas id="snake-canvas" width="420" height="420" style="border:1px solid var(--border);border-radius:14px;width:100%;height:auto;image-rendering:pixelated"></canvas>
+
+        <div class="snake-stage">
+          <canvas id="snake-canvas" width="420" height="420"
+            style="border:1px solid var(--border);border-radius:14px;width:100%;height:auto;image-rendering:pixelated"></canvas>
+          <button id="snake-start" class="snake-start btn" type="button" aria-label="Iniciar o jogo">▶ Start</button>
+        </div>
+
         <div id="snake-msg" style="min-height:18px;color:var(--sub)"></div>
-        <p style="color:var(--sub);margin:0">Controles: setas ou WASD • Espaço: pausar • R: reiniciar</p>
+        <p style="color:var(--sub);margin:0">Controles: setas ou WASD • Espaço/Enter: iniciar • Espaço: pausar • R: reiniciar</p>
       </div>
     </section>
 
@@ -371,34 +416,29 @@
 
     // ===== GitHub config (edite aqui) =====
     const GH_USER = 'darlankennedy';
-    // Liste repositórios específicos para destacar (ordem preservada). Ex.: ['darlankennedy/meu-repo','darlankennedy/outro-repo']
-    const FEATURED_REPOS = [];
-    // OU use um tópico (topic) para filtrar automaticamente. Ex.: 'portfolio' (coloque esse topic no repo pelo GitHub)
-    const FEATURED_TOPIC = '';
+    const FEATURED_REPOS = [];   // ['user/repo1','user/repo2']
+    const FEATURED_TOPIC = '';   // 'portfolio'
 
     // ===== Theme =====
     const store={get(){try{return JSON.parse(localStorage.getItem('dk_portfolio')||'{}')}catch{return{}}}, set(v){localStorage.setItem('dk_portfolio',JSON.stringify(v))}}
     const savedTheme=(store.get()||{}).theme; if(savedTheme) document.documentElement.setAttribute('data-theme',savedTheme)
     $('#theme')?.addEventListener('click',()=>{const cur=document.documentElement.getAttribute('data-theme'); const next=cur==='light'?'':'light'; if(next) document.documentElement.setAttribute('data-theme',next); else document.documentElement.removeAttribute('data-theme'); store.set(Object.assign(store.get(),{theme:next}))})
 
-    // ===== Smooth scroll with navbar offset + active link (scroll‑spy) =====
+    // ===== Smooth scroll + active =====
     const NAV=$('.nav');
-    // atualiza altura real da navbar na CSS var --nav-h
     function syncNavH(){ document.documentElement.style.setProperty('--nav-h', (NAV?.offsetHeight||72)+'px') }
     window.addEventListener('load', syncNavH); window.addEventListener('resize', syncNavH);
+
     function goTo(hash){
       if(!hash || hash==='#') return;
       if(hash==='#top'){ window.scrollTo({top:0, behavior:'smooth'}); return }
-      const target=$(hash);
-      if(!target) return;
+      const target=$(hash); if(!target) return;
       const off=(NAV?.offsetHeight||72)+8;
       const y=target.getBoundingClientRect().top + window.pageYOffset - off;
       window.scrollTo({top:y, behavior:'smooth'});
       try{ history.replaceState(null,'',hash) }catch(_){}
     }
-    $$('a[data-link]').forEach(a=>{
-      a.addEventListener('click', (e)=>{ e.preventDefault(); goTo(a.getAttribute('href')) })
-    })
+    $$('a[data-link]').forEach(a=>a.addEventListener('click', e=>{ e.preventDefault(); goTo(a.getAttribute('href')) }))
 
     const sections=['#sobre','#projetos','#experiencia','#formacao','#contato'];
     function setActive(){
@@ -418,38 +458,37 @@
       setActive();
       if(location.hash && !isReload) goTo(location.hash);
       if(isReload && location.hash){ try{ history.replaceState(null,'', location.pathname + location.search) }catch(_){} }
-    })
+    });
 
     // ===== GitHub Projects =====
     async function loadRepos(){
-      const grid = $('#projects');
-      grid.innerHTML = '';
+      const grid = $('#projects'); grid.innerHTML = '';
       const headers = { 'Accept':'application/vnd.github+json' };
 
-      // 1) Modo CURADO por lista
       if (Array.isArray(FEATURED_REPOS) && FEATURED_REPOS.length){
         try{
           const details = await Promise.all(
             FEATURED_REPOS.map(slug => fetch(`https://api.github.com/repos/${slug}`, {headers}).then(r=>r.ok?r.json():null).catch(()=>null))
           );
           const repos = details.filter(Boolean);
-          renderRepos(repos);
-          return;
-        }catch(err){ grid.innerHTML = '<p>Não foi possível carregar os repositórios selecionados.</p>'; return }
+          renderRepos(repos); return;
+        }catch(_){ grid.innerHTML = '<p>Não foi possível carregar os repositórios selecionados.</p>'; return }
       }
 
-      // 2) Modo AUTOMÁTICO (com filtro opcional por tópico)
       try{
         const res = await fetch(`https://api.github.com/users/${GH_USER}/repos?per_page=100&sort=updated`, {headers});
         const all = await res.json();
         let repos = Array.isArray(all) ? all.filter(r=>!r.fork) : [];
         if (FEATURED_TOPIC){
           const topic = FEATURED_TOPIC.toLowerCase();
-          repos = repos.filter(r => (Array.isArray(r.topics) && r.topics.map(t=>t.toLowerCase()).includes(topic)) || (r.description && r.description.toLowerCase().includes('#'+topic)));
+          repos = repos.filter(r =>
+            (Array.isArray(r.topics) && r.topics.map(t=>t.toLowerCase()).includes(topic)) ||
+            (r.description && r.description.toLowerCase().includes('#'+topic))
+          );
         }
         repos = repos.sort((a,b)=>(b.stargazers_count||0)-(a.stargazers_count||0)).slice(0,9);
         renderRepos(repos);
-      }catch(e){ grid.innerHTML='<p>Não foi possível carregar os repositórios agora.</p>' }
+      }catch(_){ grid.innerHTML='<p>Não foi possível carregar os repositórios agora.</p>' }
     }
 
     function renderRepos(repos){
@@ -460,156 +499,121 @@
         el.href = r.html_url; el.target = '_blank'; el.rel='noopener'; el.className='card project';
         const live = r.homepage ? `<span class='badge'>🔗 Live</span>` : '';
         const topics = (r.topics||[]).slice(0,2).map(t=>`<span class='badge'>#${t}</span>`).join('');
-        el.innerHTML = `<h4>${r.name}</h4>
-            <p>${r.description ? r.description.replace(/</g,'&lt;') : 'Sem descrição'}</p>
-            <div class='badges' style='margin-top:8px'>
-              <span class='badge'>★ ${r.stargazers_count||0}</span>
-              <span class='badge'>⬇ ${r.forks_count||0}</span>
-              <span class='badge'>🗓 ${r.updated_at ? new Date(r.updated_at).toLocaleDateString('pt-BR') : ''}</span>
-              <span class='badge'>${r.language||'Code'}</span>
-              ${live}
-              ${topics}
-            </div>`;
+        el.innerHTML = `
+          <h4>${r.name}</h4>
+          <p>${r.description ? r.description.replace(/</g,'&lt;') : 'Sem descrição'}</p>
+          <div class='badges' style='margin-top:8px'>
+            <span class='badge'>★ ${r.stargazers_count||0}</span>
+            <span class='badge'>⬇ ${r.forks_count||0}</span>
+            <span class='badge'>🗓 ${r.updated_at ? new Date(r.updated_at).toLocaleDateString('pt-BR') : ''}</span>
+            <span class='badge'>${r.language||'Code'}</span>
+            ${live}
+            ${topics}
+          </div>`;
         grid.appendChild(el);
       })
     }
-    
+
     // ===== Snake Game =====
- function initSnake(){
-  const canvas = document.getElementById('snake-canvas'); if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const section = document.getElementById('snake-section');
+    function initSnake(){
+      const canvas = document.getElementById('snake-canvas'); if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const section = document.getElementById('snake-section');
+      const startBtn = document.getElementById('snake-start');
 
-  // grade retangular: mais colunas do que linhas (widescreen)
-  const rows = 21;
-  const cols = 37;
+      const rows = 21, cols = 37; // widescreen
+      let speed = 8, playing = false, over = false, tail = 3; // começa parado
+      let snake = [{ x: Math.floor(cols/2), y: Math.floor(rows/2) }];
+      let dir = { x: 1, y: 0 }, nextDir = { x: 1, y: 0 };
+      let food = randFood(), score = 0, best = Number(localStorage.getItem('dk_snake_best')||0);
 
-  let speed = 8, playing = true, over = false, tail = 3;
-  let snake = [{ x: Math.floor(cols/2), y: Math.floor(rows/2) }];
-  let dir = { x: 1, y: 0 }, nextDir = { x: 1, y: 0 };
-  let food = randFood(), score = 0, best = Number(localStorage.getItem('dk_snake_best')||0);
+      const scoreEl = document.getElementById('snake-score');
+      const bestEl  = document.getElementById('snake-best');
+      const msgEl   = document.getElementById('snake-msg');
 
-  const scoreEl = document.getElementById('snake-score');
-  const bestEl  = document.getElementById('snake-best');
-  const msgEl   = document.getElementById('snake-msg');
+      let cellW = 20, cellH = 20;
+      let last = 0, acc = 0;
 
-  let cellW = 20, cellH = 20;
-  let last = 0, acc = 0;
+      function theme(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#0f162e' }
+      function updateHud(){ scoreEl.textContent = score; bestEl.textContent = best }
+      function randFood(){ let p; do{ p={x:Math.floor(Math.random()*cols), y:Math.floor(Math.random()*rows)} }while(snake.some(s=>s.x===p.x&&s.y===p.y)); return p }
+      function setDir(x,y){ if((x===-dir.x && y===0)||(y===-dir.y && x===0)) return; nextDir={x,y} }
+      function togglePause(){ if(over) return; playing=!playing; msgEl.textContent=playing?'':'Pausado' }
+      function restart(){
+        snake=[{ x: Math.floor(cols/2), y: Math.floor(rows/2) }];
+        dir=nextDir={x:1,y:0}; tail=3; score=0; over=false; food=randFood();
+        msgEl.textContent=''; updateHud(); draw();
+      }
+      function startGame(){
+        restart(); playing = true; over = false; startBtn.style.display = 'none';
+      }
 
-  function theme(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#0f162e' }
-  function updateHud(){ scoreEl.textContent = score; bestEl.textContent = best }
-  function randFood(){
-    let p;
-    do { p = { x: Math.floor(Math.random()*cols), y: Math.floor(Math.random()*rows) } }
-    while (snake.some(s => s.x===p.x && s.y===p.y));
-    return p;
-  }
-  function setDir(x,y){ if((x===-dir.x && y===0) || (y===-dir.y && x===0)) return; nextDir = {x,y} }
-  function togglePause(){ if(over) return; playing = !playing; msgEl.textContent = playing ? '' : 'Pausado' }
-  function restart(){
-    snake = [{ x: Math.floor(cols/2), y: Math.floor(rows/2) }];
-    dir = nextDir = { x: 1, y: 0 };
-    tail = 3; score = 0; over = false; playing = true;
-    food = randFood(); msgEl.textContent = '';
-    updateHud(); draw();
-  }
+      startBtn.addEventListener('click', startGame);
 
-  // ocupa 100% da largura, com altura limitada (sem ficar quadrado gigante)
-  function resize(){
-    const w = section.getBoundingClientRect().width;
-    let pxW = Math.floor(w);
-    // mantém proporção das células (cols x rows), mas limita altura
-    let pxH = Math.round(pxW * (rows / cols));
-    const MIN_H = 280, MAX_H = 480;
-    pxH = Math.max(MIN_H, Math.min(MAX_H, pxH));
+      function resize(){
+        const w = section.getBoundingClientRect().width;
+        let pxW = Math.floor(w);
+        let pxH = Math.round(pxW * (rows / cols));
+        const MIN_H=280, MAX_H=480; pxH = Math.max(MIN_H, Math.min(MAX_H, pxH));
+        const dpr = Math.min(window.devicePixelRatio||1,2);
+        canvas.width=pxW*dpr; canvas.height=pxH*dpr;
+        canvas.style.width=pxW+'px'; canvas.style.height=pxH+'px';
+        cellW = canvas.width/cols; cellH = canvas.height/rows;
+        draw();
+      }
+      window.addEventListener('resize', resize);
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width  = Math.floor(pxW * dpr);
-    canvas.height = Math.floor(pxH * dpr);
-    canvas.style.width  = pxW + 'px';
-    canvas.style.height = pxH + 'px';
+      window.addEventListener('keydown', (e)=>{
+        if (startBtn.style.display !== 'none' && (e.key===' ' || e.key==='Enter')){
+          e.preventDefault(); startGame(); return;
+        }
+        switch(e.key){
+          case 'ArrowUp': case 'w': case 'W': setDir(0,-1); break;
+          case 'ArrowDown': case 's': case 'S': setDir(0,1); break;
+          case 'ArrowLeft': case 'a': case 'A': setDir(-1,0); break;
+          case 'ArrowRight': case 'd': case 'D': setDir(1,0); break;
+          case ' ': togglePause(); e.preventDefault(); break;
+          case 'r': case 'R': restart(); break;
+        }
+      });
 
-    cellW = canvas.width / cols;
-    cellH = canvas.height / rows;
+      function tick(){
+        dir=nextDir;
+        const head={...snake[snake.length-1]};
+        head.x=(head.x+dir.x+cols)%cols; head.y=(head.y+dir.y+rows)%rows;
 
-    draw();
-  }
-  window.addEventListener('resize', resize);
+        if (snake.some(p=>p.x===head.x&&p.y===head.y)){
+          over=true; playing=false; msgEl.textContent='Game Over';
+          if(score>best){ best=score; localStorage.setItem('dk_snake_best',best) }
+          updateHud();
+          startBtn.textContent = '↻ Jogar de novo';
+          startBtn.style.display = 'inline-flex';
+        }
 
-  // botões mobile
-  document.getElementById('btn-up')?.addEventListener('click',()=>setDir(0,-1));
-  document.getElementById('btn-down')?.addEventListener('click',()=>setDir(0,1));
-  document.getElementById('btn-left')?.addEventListener('click',()=>setDir(-1,0));
-  document.getElementById('btn-right')?.addEventListener('click',()=>setDir(1,0));
-  document.getElementById('btn-restart')?.addEventListener('click',restart);
-  document.getElementById('btn-pause')?.addEventListener('click',togglePause);
+        snake.push(head); while(snake.length>tail) snake.shift();
+        if(head.x===food.x && head.y===food.y){ tail++; score++; food=randFood(); updateHud() }
+      }
 
-  // teclado
-  window.addEventListener('keydown', (e)=>{
-    switch(e.key){
-      case 'ArrowUp': case 'w': case 'W': setDir(0,-1); break;
-      case 'ArrowDown': case 's': case 'S': setDir(0,1); break;
-      case 'ArrowLeft': case 'a': case 'A': setDir(-1,0); break;
-      case 'ArrowRight': case 'd': case 'D': setDir(1,0); break;
-      case ' ': togglePause(); e.preventDefault(); break;
-      case 'r': case 'R': restart(); break;
+      function draw(){
+        const bg=theme('--card'), br=theme('--brand'), br2=theme('--brand2'), hot=theme('--hot');
+        ctx.fillStyle=bg; ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle=hot; ctx.fillRect(Math.floor(food.x*cellW), Math.floor(food.y*cellH), Math.ceil(cellW), Math.ceil(cellH));
+        for(let i=0;i<snake.length;i++){
+          const p=snake[i]; ctx.fillStyle=i===snake.length-1?br2:br;
+          ctx.fillRect(Math.floor(p.x*cellW), Math.floor(p.y*cellH), Math.ceil(cellW), Math.ceil(cellH));
+        }
+      }
+
+      function loop(ts){
+        if(!last) last=ts; const dt=(ts-last)/1000; last=ts;
+        if(playing && !over){ acc+=dt; const step=1/speed; while(acc>=step){ tick(); acc-=step } }
+        draw(); requestAnimationFrame(loop);
+      }
+
+      updateHud(); resize(); requestAnimationFrame(loop);
     }
-  });
 
-  function tick(){
-    dir = nextDir;
-    const head = { ...snake[snake.length-1] };
-    head.x = (head.x + dir.x + cols) % cols;
-    head.y = (head.y + dir.y + rows) % rows;
-
-    if (snake.some(p => p.x===head.x && p.y===head.y)){
-      over = true; playing = false; msgEl.textContent = 'Game Over';
-      if (score > best){ best = score; localStorage.setItem('dk_snake_best', best) }
-      updateHud();
-    }
-
-    snake.push(head);
-    while (snake.length > tail) snake.shift();
-
-    if (head.x===food.x && head.y===food.y){
-      tail++; score++; food = randFood(); updateHud();
-    }
-  }
-
-  function draw(){
-    const bg  = theme('--card');
-    const br  = theme('--brand');
-    const br2 = theme('--brand2');
-    const hot = theme('--hot');
-
-    ctx.fillStyle = bg; ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    // comida
-    ctx.fillStyle = hot;
-    ctx.fillRect(Math.floor(food.x*cellW), Math.floor(food.y*cellH), Math.ceil(cellW), Math.ceil(cellH));
-
-    // cobra
-    for(let i=0;i<snake.length;i++){
-      const p = snake[i];
-      ctx.fillStyle = i===snake.length-1 ? br2 : br;
-      ctx.fillRect(Math.floor(p.x*cellW), Math.floor(p.y*cellH), Math.ceil(cellW), Math.ceil(cellH));
-    }
-  }
-
-  function loop(ts){
-    if(!last) last = ts;
-    const dt = (ts - last) / 1000; last = ts;
-    if (playing && !over){
-      acc += dt; const step = 1 / speed;
-      while (acc >= step){ tick(); acc -= step }
-    }
-    draw();
-    requestAnimationFrame(loop);
-  }
-
-  updateHud(); resize(); requestAnimationFrame(loop);
-}
-// Init
+    // Init
     $('#year').textContent=new Date().getFullYear();
     loadRepos();
     initSnake();
