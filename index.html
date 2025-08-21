@@ -8,8 +8,8 @@
   <meta name="theme-color" content="#0b1020" />
   <style>
     :root{
-      --bg:#0b1020; --text:#e5e7eb; --muted:#0d1430; --card:#0f162e; --border:#1f2a4c; --sub:#9ca3af;
-      --brand:#00e5ff; --brand2:#7c4dff; --accent:#22c55e; --hot:#ff8a00; --danger:#ef4444;
+      --bg:#02040a; --text:#e6eaf2; --muted:#0a0f1e; --card:#070b16; --border:#111827; --sub:#9aa3b8;
+      --brand:#a78bfa; --brand2:#f472b6; --accent:#22c55e; --hot:#fb923c; --danger:#ef4444;
       --nav-h:72px;
     }
     @media (prefers-color-scheme: light){
@@ -20,19 +20,21 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     html{scroll-behavior:smooth}
-    body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu; background:var(--bg); color:var(--text); overflow-x:hidden}
+    body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu; background:var(--bg); color:var(--text); overflow-x:hidden; padding-top:var(--nav-h)}
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
 
     /* ====== AURORA BACKGROUND ====== */
-    .aurora{position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(1200px 600px at 10% -10%, rgba(0,229,255,.18), transparent),
-                                 radial-gradient(1000px 500px at 90% 10%, rgba(124,77,255,.16), transparent),
-                                 radial-gradient(900px 700px at 50% 100%, rgba(34,197,94,.1), transparent);} 
-    .glow{position:fixed;inset:-10%;filter:blur(80px);opacity:.55;background:conic-gradient(from 180deg, rgba(0,229,255,.2), rgba(124,77,255,.2), rgba(34,197,94,.15), rgba(0,229,255,.2));animation:spin 18s linear infinite}
+    .aurora{position:fixed;inset:0;pointer-events:none;z-index:-1;background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(255,255,255,.045), transparent),
+      radial-gradient(1000px 500px at 90% 10%, rgba(255,255,255,.035), transparent),
+      radial-gradient(900px 700px at 50% 100%, rgba(255,255,255,.028), transparent);
+    }  
+    .glow{position:fixed;inset:-10%;filter:blur(140px);opacity:.22;background:radial-gradient(800px 800px at 20% 0%, rgba(255,255,255,.06), transparent), radial-gradient(900px 700px at 80% 10%, rgba(255,255,255,.04), transparent);animation:none;pointer-events:none;z-index:-2}
     @keyframes spin{to{transform:rotate(1turn)}}
 
     /* ====== NAVBAR ====== */
-    .nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(10px);background:color-mix(in oklab, var(--bg) 88%, transparent); border-bottom:1px solid var(--border)}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(10px);background:color-mix(in oklab, var(--bg) 96%, transparent); border-bottom:1px solid var(--border)}
     .nav .bar{max-width:1200px;margin:auto;display:flex;align-items:center;gap:14px;padding:12px 18px}
     .logo{font-weight:800;letter-spacing:.5px;background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
     .nav a{padding:8px 12px;border-radius:10px}
@@ -43,9 +45,9 @@
     .btn:hover{transform:translateY(-1px)}
 
     /* ====== HERO ====== */
-    .wrap{max-width:1200px;margin:auto;padding:24px}
-    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;padding:28px;margin-top:18px;scroll-margin-top:var(--nav-h)}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:22px;box-shadow:0 8px 28px rgba(0,0,0,.28)}
+    .wrap{max-width:1280px;width:min(1280px,94vw);margin:auto;padding:24px 20px}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;padding:12px 0;margin-top:0;scroll-margin-top:var(--nav-h)}
+    .card{background:transparent;border:none;border-radius:0;box-shadow:none}
     .headline{font-size:clamp(28px,4vw,48px);font-weight:900;margin:0;line-height:1.1}
     .headline strong{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
     .kicker{color:var(--sub);margin:.5rem 0 1rem}
@@ -63,7 +65,8 @@
     
 
     /* Sections */
-    .section{margin:26px 0;padding:22px;scroll-margin-top:var(--nav-h)}
+    .section{margin:18px 0;padding:16px 0;scroll-margin-top:var(--nav-h)}
+    .section + .section{border-top:1px solid var(--border)}
     .section-title{display:flex;align-items:center;gap:10px;font-weight:800;margin:0 0 10px}
     .section-title .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand2))}
 
@@ -80,16 +83,17 @@
 
     /* Projects */
     .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
-    .project{position:relative;transition:transform .15s ease, box-shadow .2s;will-change:transform}
+    .project{position:relative;transition:transform .15s ease, box-shadow .2s;will-change:transform;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:16px}
     .project:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
     .project h4{margin:6px 0}
     .project p{margin:0;color:var(--sub);font-size:14px}
+    .project .badges{justify-content:center}
 
     /* Timeline */
-    .timeline{position:relative;padding-left:18px}
-    .timeline:before{content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;background:linear-gradient(var(--brand),var(--brand2))}
+    .timeline{position:relative;padding-left:42px}
+    .timeline:before{content:"";position:absolute;left:18px;top:0;bottom:0;width:2px;background:linear-gradient(var(--brand),var(--brand2))}
     .tl-item{position:relative;margin:12px 0}
-    .tl-item:before{content:"";position:absolute;left:-2px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 3px rgba(0,229,255,.22)}
+    .tl-item:before{content:"";position:absolute;left:-29px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 3px rgba(0,229,255,.22)}
 
     /* Contact */
     .contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
@@ -131,7 +135,7 @@
     <!-- HERO -->
     <section class="hero card" id="top">
       <div>
-        <h1 class="headline">Olá, eu sou <strong>Darlan Kennedy</strong> — <br/>Full Stack Developer focado em <strong>APIs performáticas</strong>, <strong>microsserviços</strong> e <strong>DX</strong>.</h1>
+        <h1 class="headline">Olá, eu sou <strong>Darlan Kennedy</strong> — <br/>Full Stack Developer focado em <strong>APIs performáticas</strong>, <strong>microsserviços</strong>.</h1>
         <p class="kicker">Java • Node.js • PHP • Python • React • Vue • Angular • Docker • Kubernetes • CI/CD</p>
         <div class="badges">
           <span class="badge">+10 anos em TI</span>
@@ -148,7 +152,7 @@
       <div class="photo">
         <div class="ring">
           <!-- Substitua por "profile.jpg" ao publicar -->
-          <img src="profile.jpg" alt="Foto de Darlan Kennedy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%230f162e'/><text x='50%' y='52%' font-size='14' fill='%23a5b4fc' text-anchor='middle' font-family='system-ui'>Adicione profile.jpg</text></svg>'"/>
+          <img src="profile.jpg" alt="Foto de Darlan Kennedy" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%230f162e\'/><text x=\'50%\' y=\'52%\' font-size=\'14\' fill=\'%23a5b4fc\' text-anchor=\'middle\' font-family=\'system-ui\'>Adicione profile.jpg</text></svg>'"/>
         </div>
         <div class="float">Manaus/AM • Disponível</div>
       </div>
@@ -233,27 +237,6 @@
       <div class="badges" style="margin-top:14px">
         <span class="badge">Cursando — Engenharia da Computação</span>
         <span class="badge">Técnico em Informática</span>
-      </div>
-    </section>
-
-    <!-- JOGO DA COBRINHA -->
-    <section class="section card" id="snake-section">
-      <div class="section-title"><span class="dot"></span><span>Jogo da Cobrinha</span></div>
-      <div class="snake-wrap">
-        <div class="gamebar">
-          <div> Pontos: <strong id="snake-score">0</strong> • Recorde: <strong id="snake-best">0</strong> </div>
-          <div class="game-ctrls" aria-label="Controles do jogo">
-            <button class="btn" id="btn-left" aria-label="Esquerda">◀</button>
-            <button class="btn" id="btn-up" aria-label="Cima">▲</button>
-            <button class="btn" id="btn-down" aria-label="Baixo">▼</button>
-            <button class="btn" id="btn-right" aria-label="Direita">▶</button>
-            <button class="btn" id="btn-pause" aria-label="Pausar/Retomar">⏯</button>
-            <button class="btn" id="btn-restart" aria-label="Reiniciar">↻</button>
-          </div>
-        </div>
-        <canvas id="snake-canvas" width="420" height="420" style="border:1px solid var(--border);border-radius:14px;width:100%;height:auto;image-rendering:pixelated"></canvas>
-        <div id="snake-msg" style="min-height:18px;color:var(--sub)"></div>
-        <p style="color:var(--sub);margin:0">Controles: setas ou WASD • Espaço: pausar • R: reiniciar</p>
       </div>
     </section>
 
@@ -344,6 +327,27 @@
       </div>
     </section>
 
+        <!-- JOGO DA COBRINHA -->
+    <section class="section card" id="snake-section">
+      <div class="section-title"><span class="dot"></span><span>Jogo da Cobrinha</span></div>
+      <div class="snake-wrap">
+        <div class="gamebar">
+          <div> Pontos: <strong id="snake-score">0</strong> • Recorde: <strong id="snake-best">0</strong> </div>
+          <div class="game-ctrls" aria-label="Controles do jogo">
+            <button class="btn" id="btn-left" aria-label="Esquerda">◀</button>
+            <button class="btn" id="btn-up" aria-label="Cima">▲</button>
+            <button class="btn" id="btn-down" aria-label="Baixo">▼</button>
+            <button class="btn" id="btn-right" aria-label="Direita">▶</button>
+            <button class="btn" id="btn-pause" aria-label="Pausar/Retomar">⏯</button>
+            <button class="btn" id="btn-restart" aria-label="Reiniciar">↻</button>
+          </div>
+        </div>
+        <canvas id="snake-canvas" width="420" height="420" style="border:1px solid var(--border);border-radius:14px;width:100%;height:auto;image-rendering:pixelated"></canvas>
+        <div id="snake-msg" style="min-height:18px;color:var(--sub)"></div>
+        <p style="color:var(--sub);margin:0">Controles: setas ou WASD • Espaço: pausar • R: reiniciar</p>
+      </div>
+    </section>
+
     <!-- CONTATO -->
     <section class="section card" id="contato">
       <div class="section-title"><span class="dot"></span><span>Contato</span></div>
@@ -379,6 +383,9 @@
 
     // ===== Smooth scroll with navbar offset + active link (scroll‑spy) =====
     const NAV=$('.nav');
+    // atualiza altura real da navbar na CSS var --nav-h
+    function syncNavH(){ document.documentElement.style.setProperty('--nav-h', (NAV?.offsetHeight||72)+'px') }
+    window.addEventListener('load', syncNavH); window.addEventListener('resize', syncNavH);
     function goTo(hash){
       if(!hash || hash==='#') return;
       if(hash==='#top'){ window.scrollTo({top:0, behavior:'smooth'}); return }
@@ -405,7 +412,13 @@
       $$('.nav a[data-link]').forEach(a=>a.classList.toggle('active', a.getAttribute('href')===current))
     }
     window.addEventListener('scroll', setActive, {passive:true});
-    window.addEventListener('load', ()=>{ setActive(); if(location.hash) goTo(location.hash) })
+    const navEntry=(performance.getEntriesByType?performance.getEntriesByType('navigation')[0]:null);
+    const isReload = navEntry ? navEntry.type==='reload' : (performance.navigation && performance.navigation.type===1);
+    window.addEventListener('load', ()=>{
+      setActive();
+      if(location.hash && !isReload) goTo(location.hash);
+      if(isReload && location.hash){ try{ history.replaceState(null,'', location.pathname + location.search) }catch(_){} }
+    })
 
     // ===== GitHub Projects =====
     async function loadRepos(){
@@ -460,60 +473,142 @@
         grid.appendChild(el);
       })
     }
-    }
-
+    
     // ===== Snake Game =====
-    function initSnake(){
-      const canvas=document.getElementById('snake-canvas'); if(!canvas) return; const ctx=canvas.getContext('2d');
-      const section=document.getElementById('snake-section');
-      let grid=21, speed=8, playing=true, over=false, tail=3;
-      let snake=[{x:10,y:10}], dir={x:1,y:0}, nextDir={x:1,y:0};
-      let food=randFood(); let score=0; let best=Number(localStorage.getItem('dk_snake_best')||0);
-      const scoreEl=document.getElementById('snake-score'); const bestEl=document.getElementById('snake-best'); const msgEl=document.getElementById('snake-msg');
-      let size=20; let last=0, acc=0;
+ function initSnake(){
+  const canvas = document.getElementById('snake-canvas'); if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const section = document.getElementById('snake-section');
 
-      function theme(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#0f162e' }
-      function updateHud(){ scoreEl.textContent=score; bestEl.textContent=best }
-      function randFood(){ let p; do{ p={x:Math.floor(Math.random()*grid), y:Math.floor(Math.random()*grid)} }while(snake.some(s=>s.x===p.x&&s.y===p.y)); return p }
-      function setDir(x,y){ if((x===-dir.x&&y===0)||(y===-dir.y&&x===0)) return; nextDir={x,y} }
-      function togglePause(){ if(over) return; playing=!playing; msgEl.textContent=playing?'':'Pausado' }
-      function restart(){ snake=[{x:10,y:10}]; dir={x:1,y:0}; nextDir={x:1,y:0}; tail=3; score=0; over=false; playing=true; food=randFood(); msgEl.textContent=''; updateHud(); draw() }
+  // grade retangular: mais colunas do que linhas (widescreen)
+  const rows = 21;
+  const cols = 37;
 
-      function resize(){ const w=section.getBoundingClientRect().width; const px=Math.floor(Math.min(560, w-20)); const dpr=Math.min(window.devicePixelRatio||1,2); canvas.width=px*dpr; canvas.height=px*dpr; canvas.style.width=px+'px'; canvas.style.height=px+'px'; size=(px*dpr)/grid; draw() }
-      window.addEventListener('resize', resize);
+  let speed = 8, playing = true, over = false, tail = 3;
+  let snake = [{ x: Math.floor(cols/2), y: Math.floor(rows/2) }];
+  let dir = { x: 1, y: 0 }, nextDir = { x: 1, y: 0 };
+  let food = randFood(), score = 0, best = Number(localStorage.getItem('dk_snake_best')||0);
 
-      document.getElementById('btn-up')?.addEventListener('click',()=>setDir(0,-1));
-      document.getElementById('btn-down')?.addEventListener('click',()=>setDir(0,1));
-      document.getElementById('btn-left')?.addEventListener('click',()=>setDir(-1,0));
-      document.getElementById('btn-right')?.addEventListener('click',()=>setDir(1,0));
-      document.getElementById('btn-restart')?.addEventListener('click',restart);
-      document.getElementById('btn-pause')?.addEventListener('click',togglePause);
+  const scoreEl = document.getElementById('snake-score');
+  const bestEl  = document.getElementById('snake-best');
+  const msgEl   = document.getElementById('snake-msg');
 
-      window.addEventListener('keydown', (e)=>{
-        switch(e.key){
-          case 'ArrowUp': case 'w': case 'W': setDir(0,-1); break;
-          case 'ArrowDown': case 's': case 'S': setDir(0,1); break;
-          case 'ArrowLeft': case 'a': case 'A': setDir(-1,0); break;
-          case 'ArrowRight': case 'd': case 'D': setDir(1,0); break;
-          case ' ': togglePause(); e.preventDefault(); break;
-          case 'r': case 'R': restart(); break;
-        }
-      });
+  let cellW = 20, cellH = 20;
+  let last = 0, acc = 0;
 
-      function tick(){ dir=nextDir; const head={...snake[snake.length-1]}; head.x=(head.x+dir.x+grid)%grid; head.y=(head.y+dir.y+grid)%grid;
-        if(snake.some(p=>p.x===head.x&&p.y===head.y)){ over=true; playing=false; msgEl.textContent='Game Over'; if(score>best){best=score; localStorage.setItem('dk_snake_best',best)}; updateHud() }
-        snake.push(head); while(snake.length>tail) snake.shift();
-        if(head.x===food.x && head.y===food.y){ tail++; score++; food=randFood(); updateHud() }
-      }
-      function draw(){ const bg=theme('--card'); const br=theme('--brand'); const br2=theme('--brand2'); const hot=theme('--hot');
-        ctx.fillStyle=bg; ctx.fillRect(0,0,canvas.width,canvas.height);
-        const cell=size; ctx.fillStyle=hot; ctx.fillRect(food.x*cell, food.y*cell, cell, cell);
-        for(let i=0;i<snake.length;i++){ const p=snake[i]; ctx.fillStyle=i===snake.length-1?br2:br; ctx.fillRect(p.x*cell, p.y*cell, cell, cell) }
-      }
-      function loop(ts){ if(!last) last=ts; const dt=(ts-last)/1000; last=ts; if(playing&&!over){ acc+=dt; const step=1/speed; while(acc>=step){ tick(); acc-=step } } draw(); requestAnimationFrame(loop) }
-      updateHud(); resize(); requestAnimationFrame(loop);
+  function theme(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#0f162e' }
+  function updateHud(){ scoreEl.textContent = score; bestEl.textContent = best }
+  function randFood(){
+    let p;
+    do { p = { x: Math.floor(Math.random()*cols), y: Math.floor(Math.random()*rows) } }
+    while (snake.some(s => s.x===p.x && s.y===p.y));
+    return p;
+  }
+  function setDir(x,y){ if((x===-dir.x && y===0) || (y===-dir.y && x===0)) return; nextDir = {x,y} }
+  function togglePause(){ if(over) return; playing = !playing; msgEl.textContent = playing ? '' : 'Pausado' }
+  function restart(){
+    snake = [{ x: Math.floor(cols/2), y: Math.floor(rows/2) }];
+    dir = nextDir = { x: 1, y: 0 };
+    tail = 3; score = 0; over = false; playing = true;
+    food = randFood(); msgEl.textContent = '';
+    updateHud(); draw();
+  }
+
+  // ocupa 100% da largura, com altura limitada (sem ficar quadrado gigante)
+  function resize(){
+    const w = section.getBoundingClientRect().width;
+    let pxW = Math.floor(w);
+    // mantém proporção das células (cols x rows), mas limita altura
+    let pxH = Math.round(pxW * (rows / cols));
+    const MIN_H = 280, MAX_H = 480;
+    pxH = Math.max(MIN_H, Math.min(MAX_H, pxH));
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width  = Math.floor(pxW * dpr);
+    canvas.height = Math.floor(pxH * dpr);
+    canvas.style.width  = pxW + 'px';
+    canvas.style.height = pxH + 'px';
+
+    cellW = canvas.width / cols;
+    cellH = canvas.height / rows;
+
+    draw();
+  }
+  window.addEventListener('resize', resize);
+
+  // botões mobile
+  document.getElementById('btn-up')?.addEventListener('click',()=>setDir(0,-1));
+  document.getElementById('btn-down')?.addEventListener('click',()=>setDir(0,1));
+  document.getElementById('btn-left')?.addEventListener('click',()=>setDir(-1,0));
+  document.getElementById('btn-right')?.addEventListener('click',()=>setDir(1,0));
+  document.getElementById('btn-restart')?.addEventListener('click',restart);
+  document.getElementById('btn-pause')?.addEventListener('click',togglePause);
+
+  // teclado
+  window.addEventListener('keydown', (e)=>{
+    switch(e.key){
+      case 'ArrowUp': case 'w': case 'W': setDir(0,-1); break;
+      case 'ArrowDown': case 's': case 'S': setDir(0,1); break;
+      case 'ArrowLeft': case 'a': case 'A': setDir(-1,0); break;
+      case 'ArrowRight': case 'd': case 'D': setDir(1,0); break;
+      case ' ': togglePause(); e.preventDefault(); break;
+      case 'r': case 'R': restart(); break;
+    }
+  });
+
+  function tick(){
+    dir = nextDir;
+    const head = { ...snake[snake.length-1] };
+    head.x = (head.x + dir.x + cols) % cols;
+    head.y = (head.y + dir.y + rows) % rows;
+
+    if (snake.some(p => p.x===head.x && p.y===head.y)){
+      over = true; playing = false; msgEl.textContent = 'Game Over';
+      if (score > best){ best = score; localStorage.setItem('dk_snake_best', best) }
+      updateHud();
     }
 
+    snake.push(head);
+    while (snake.length > tail) snake.shift();
+
+    if (head.x===food.x && head.y===food.y){
+      tail++; score++; food = randFood(); updateHud();
+    }
+  }
+
+  function draw(){
+    const bg  = theme('--card');
+    const br  = theme('--brand');
+    const br2 = theme('--brand2');
+    const hot = theme('--hot');
+
+    ctx.fillStyle = bg; ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    // comida
+    ctx.fillStyle = hot;
+    ctx.fillRect(Math.floor(food.x*cellW), Math.floor(food.y*cellH), Math.ceil(cellW), Math.ceil(cellH));
+
+    // cobra
+    for(let i=0;i<snake.length;i++){
+      const p = snake[i];
+      ctx.fillStyle = i===snake.length-1 ? br2 : br;
+      ctx.fillRect(Math.floor(p.x*cellW), Math.floor(p.y*cellH), Math.ceil(cellW), Math.ceil(cellH));
+    }
+  }
+
+  function loop(ts){
+    if(!last) last = ts;
+    const dt = (ts - last) / 1000; last = ts;
+    if (playing && !over){
+      acc += dt; const step = 1 / speed;
+      while (acc >= step){ tick(); acc -= step }
+    }
+    draw();
+    requestAnimationFrame(loop);
+  }
+
+  updateHud(); resize(); requestAnimationFrame(loop);
+}
 // Init
     $('#year').textContent=new Date().getFullYear();
     loadRepos();
